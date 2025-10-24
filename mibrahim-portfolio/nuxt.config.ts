@@ -1,0 +1,139 @@
+import { defineNuxtConfig } from "nuxt/config";
+
+// https://nuxt.com/docs/api/configuration/nuxt-config
+export default defineNuxtConfig({
+  devtools: { enabled: true },
+
+  // App configuration
+  app: {
+    head: {
+      charset: "utf-8",
+      viewport: "width=device-width, initial-scale=1",
+      title: "Mohamed DJIBRILA - Développeur FullStack TypeScript",
+      meta: [
+        {
+          name: "description",
+          content:
+            "Portfolio de Mohamed DJIBRILA, développeur web FullStack spécialisé en TypeScript (React, Vue.js, NestJS), Ruby on Rails et DevOps",
+        },
+        {
+          name: "keywords",
+          content:
+            "développeur fullstack, typescript, react, vue.js, nestjs, ruby on rails, devops, freelance, développeur web",
+        },
+        { name: "author", content: "Mohamed DJIBRILA" },
+        {
+          property: "og:title",
+          content: "Mohamed DJIBRILA - Développeur FullStack",
+        },
+        {
+          property: "og:description",
+          content: "Développeur web FullStack avec 4+ ans d'expérience",
+        },
+        { property: "og:type", content: "website" },
+        { property: "og:url", content: "https://votre-domaine.com" },
+        {
+          property: "og:image",
+          content: "https://votre-domaine.com/og-image.jpg",
+        },
+        { name: "twitter:card", content: "summary_large_image" },
+        {
+          name: "twitter:title",
+          content: "Mohamed DJIBRILA - Développeur FullStack",
+        },
+        {
+          name: "twitter:description",
+          content: "Développeur web FullStack avec 4+ ans d'expérience",
+        },
+        { name: "theme-color", content: "#2a3257" },
+      ],
+      link: [
+        { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+        { rel: "canonical", href: "https://votre-domaine.com" },
+      ],
+      script: [
+        {
+          src: "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js",
+          defer: true,
+        },
+        {
+          src: "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js",
+          defer: true,
+        },
+      ],
+    },
+  },
+
+  // CSS
+  css: ["@/assets/css/main.css"],
+
+  // PostCSS
+  postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
+  },
+
+  // Modules
+  modules: [
+    [
+      "@nuxtjs/tailwindcss",
+      {
+        cssPath: "~/assets/css/tailwind.css",
+        configPath: "tailwind.config",
+        exposeConfig: false,
+        viewer: true,
+      },
+    ],
+    [
+      "@nuxt/image",
+      {
+        quality: 80,
+        formats: ["webp", "avif", "jpeg"],
+      },
+    ],
+  ],
+
+  // SSR configuration
+  ssr: true,
+
+  // Nitro configuration for SEO
+  nitro: {
+    compressPublicAssets: true,
+    prerender: {
+      crawlLinks: true,
+      routes: ["/"],
+    },
+  },
+
+  // Runtime config
+  runtimeConfig: {
+    public: {
+      siteUrl: "https://votre-domaine.com",
+    },
+  },
+
+  // Experimental features
+  experimental: {
+    payloadExtraction: false,
+  },
+
+  // TypeScript
+  typescript: {
+    strict: true,
+    shim: false,
+  },
+
+  // Build configuration
+  build: {
+    transpile: ["gsap"],
+  },
+
+  // Performance optimizations
+  routeRules: {
+    "/": { prerender: true },
+  },
+
+  compatibilityDate: "2025-01-24",
+});
