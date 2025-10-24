@@ -51,16 +51,6 @@ export default defineNuxtConfig({
         { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
         { rel: "canonical", href: "https://votre-domaine.com" },
       ],
-      script: [
-        {
-          src: "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js",
-          defer: true,
-        },
-        {
-          src: "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js",
-          defer: true,
-        },
-      ],
     },
   },
 
