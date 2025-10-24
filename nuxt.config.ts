@@ -32,10 +32,10 @@ export default defineNuxtConfig({
           content: "Développeur web FullStack avec 4+ ans d'expérience",
         },
         { property: "og:type", content: "website" },
-        { property: "og:url", content: "https://votre-domaine.com" },
+        { property: "og:url", content: "https://mohamed-djibrila.info" },
         {
           property: "og:image",
-          content: "https://votre-domaine.com/og-image.jpg",
+          content: "https://mohamed-djibrila.info/profile.jpg",
         },
         { name: "twitter:card", content: "summary_large_image" },
         {
@@ -50,7 +50,7 @@ export default defineNuxtConfig({
       ],
       link: [
         { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
-        { rel: "canonical", href: "https://votre-domaine.com" },
+        { rel: "canonical", href: "https://mohamed-djibrila.info" },
       ],
     },
   },
@@ -103,7 +103,7 @@ export default defineNuxtConfig({
   // Runtime config
   runtimeConfig: {
     public: {
-      siteUrl: "https://votre-domaine.com",
+      siteUrl: "https://mohamed-djibrila.info",
     },
   },
 

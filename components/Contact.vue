@@ -181,6 +181,7 @@ const handleSubmit = async () => {
 }
 
 onMounted(() => {
+  gsap.registerPlugin(ScrollTrigger)
   gsap.from('.contact-info', {
     opacity: 0,
     x: -50,

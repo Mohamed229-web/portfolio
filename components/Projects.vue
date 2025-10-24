@@ -52,7 +52,7 @@
 import { ref, onMounted, onUnmounted, nextTick } from 'vue'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-gsap.registerPlugin(ScrollTrigger)
+
 
 const projects = ref([
   {
@@ -128,6 +128,7 @@ function detectScroller(): Element | undefined {
 }
 
 onMounted(async () => {
+  gsap.registerPlugin(ScrollTrigger)
   await nextTick()
   const scroller = detectScroller()
 

@@ -93,13 +93,11 @@ import { onMounted, onUnmounted, ref, nextTick } from "vue";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Register ScrollTrigger once at module scope
-gsap.registerPlugin(ScrollTrigger);
-
 const aboutSection = ref<HTMLElement | null>(null);
 let ctx: gsap.Context | undefined;
 
 onMounted(async () => {
+  gsap.registerPlugin(ScrollTrigger);
   await nextTick();
 
   ctx = gsap.context(() => {

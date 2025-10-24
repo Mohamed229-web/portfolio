@@ -103,7 +103,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, nextTick } from 'vue'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -151,7 +151,6 @@ function detectScroller(): Element | undefined {
   ) as Element | undefined
 }
 
-import { nextTick } from 'vue'
 let ctx: gsap.Context | undefined
 onMounted(async () => {
   gsap.registerPlugin(ScrollTrigger);
