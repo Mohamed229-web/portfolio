@@ -15,7 +15,7 @@
       class="whatsapp-float"
       aria-label="Contactez-moi sur WhatsApp"
     >
-      <img src="/whatsapp.webp" alt="WhatsApp" class="whatsapp-icon" />
+      <img src="/whatsApp.webp" alt="WhatsApp" class="whatsapp-icon" />
     </a>
   </div>
 </template>
