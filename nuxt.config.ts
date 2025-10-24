@@ -6,6 +6,7 @@ export default defineNuxtConfig({
 
   // App configuration
   app: {
+    baseURL: process.env.NUXT_APP_BASE_URL || "/",
     head: {
       charset: "utf-8",
       viewport: "width=device-width, initial-scale=1",
@@ -81,6 +82,7 @@ export default defineNuxtConfig({
       {
         quality: 80,
         formats: ["webp", "avif", "jpeg"],
+        provider: "static",
       },
     ],
   ],
@@ -88,12 +90,13 @@ export default defineNuxtConfig({
   // SSR configuration
   ssr: true,
 
-  // Nitro configuration for SEO
   nitro: {
+    preset: "github_pages",
     compressPublicAssets: true,
     prerender: {
       crawlLinks: true,
       routes: ["/"],
+      failOnError: false,
     },
   },
 
