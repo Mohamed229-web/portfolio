@@ -48,7 +48,7 @@
         <div class="hero-image">
           <div class="image-wrapper">
             <div class="image-glow"></div>
-            <img src="/images/profile.jpg" alt="Mohamed Ibrahim DJIBRILA" />
+            <img :src="ProfileImage" alt="Mohamed Ibrahim DJIBRILA" />
           </div>
         </div>
       </div>
@@ -66,6 +66,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import gsap from 'gsap'
+import ProfileImage from '~/assets/images/profile.jpg'
 
 onMounted(() => {
   const tl = gsap.timeline()
@@ -78,7 +79,6 @@ onMounted(() => {
     .from('.hero-cta', { opacity: 0, y: 30, duration: 0.8, ease: 'power3.out' }, '-=0.4')
     .from('.hero-socials', { opacity: 0, y: 30, duration: 0.8, ease: 'power3.out' }, '-=0.4')
     .from('.hero-image', { opacity: 0, x: 50, duration: 1, ease: 'power3.out' }, '-=1')
-  
   // Animate gradient orbs
   gsap.to('.orb-1', {
     x: 100,

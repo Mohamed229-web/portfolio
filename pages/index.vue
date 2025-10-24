@@ -15,7 +15,7 @@
       class="whatsapp-float"
       aria-label="Contactez-moi sur WhatsApp"
     >
-      <img src="/whatsApp.webp" alt="WhatsApp" class="whatsapp-icon" />
+      <img :src="WhatsAppPic" alt="WhatsApp" class="whatsapp-icon" />
     </a>
   </div>
 </template>
@@ -32,6 +32,7 @@ import Skills from "~/components/Skills.vue";
 import Projects from "~/components/Projects.vue";
 import Experience from "~/components/Experience.vue";
 import Contact from "~/components/Contact.vue";
+import WhatsAppPic from "~/assets/images/whatsApp.webp";
 
 onMounted(() => {
   gsap.registerPlugin(ScrollTrigger);
