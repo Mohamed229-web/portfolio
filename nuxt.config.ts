@@ -1,4 +1,5 @@
 import { defineNuxtConfig } from "nuxt/config";
+import { config, mode } from "process";
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
@@ -68,6 +69,19 @@ export default defineNuxtConfig({
         provider: "static",
       },
     ],
+    [
+      "@nuxt/tailwindcss",
+      {
+        cssPath: "~/assets/css/main.css",
+        configPath: "tailwind.config.js",
+        exposeConfig: false,
+        injectPosition: 0,
+        viewer: true,
+        config: {
+          mode: "jit",
+        },
+      },
+    ],
   ],
 
   ssr: false,
@@ -85,10 +99,17 @@ export default defineNuxtConfig({
 
   typescript: { strict: true, shim: false },
 
-  build: { transpile: ["gsap"] },
-
   vite: {
     build: { assetsInlineLimit: 0 },
+    css: {
+      postcss: {
+        plugins: [require("tailwindcss"), require("autoprefixer")],
+      },
+    },
+  },
+
+  build: {
+    transpile: ["gsap"],
   },
 
   routeRules: { "/": { prerender: true } },
