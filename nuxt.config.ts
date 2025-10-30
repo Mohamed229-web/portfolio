@@ -53,7 +53,7 @@ export default defineNuxtConfig({
     },
   },
 
-  css: ["~/assets/css/tailwind.css"],
+  css: ["./assets/css/tailwind.css"],
 
   modules: [
     [
@@ -71,9 +71,6 @@ export default defineNuxtConfig({
 
   nitro: {
     preset: process.env.NITRO_PRESET || "github_pages",
-    output: { publicDir: ".output/public" },
-    compressPublicAssets: true,
-    prerender: { crawlLinks: true, routes: ["/"], failOnError: false },
   },
 
   runtimeConfig: { public: { siteUrl: "https://mohamed-djibrila.info" } },
