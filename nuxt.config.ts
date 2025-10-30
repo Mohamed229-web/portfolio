@@ -6,7 +6,7 @@ export default defineNuxtConfig({
 
   // App configuration
   app: {
-    baseURL: "/",
+    baseURL: "/portfolio/",
     head: {
       charset: "utf-8",
       viewport: "width=device-width, initial-scale=1",
