@@ -1,5 +1,4 @@
 import { defineNuxtConfig } from "nuxt/config";
-import { config, mode } from "process";
 
 export default defineNuxtConfig({
   devtools: { enabled: true },
@@ -56,10 +55,6 @@ export default defineNuxtConfig({
 
   css: ["~/assets/css/main.css"],
 
-  postcss: {
-    plugins: { tailwindcss: {}, autoprefixer: {} },
-  },
-
   modules: [
     [
       "@nuxt/image",
@@ -70,7 +65,7 @@ export default defineNuxtConfig({
       },
     ],
     [
-      "@nuxt/tailwindcss",
+      "@nuxtjs/tailwindcss",
       {
         cssPath: "~/assets/css/main.css",
         configPath: "tailwind.config.js",
@@ -87,7 +82,7 @@ export default defineNuxtConfig({
   ssr: false,
 
   nitro: {
-    preset: process.env.NITRO_PRESET || "static",
+    preset: process.env.NITRO_PRESET || "github_pages",
     output: { publicDir: ".output/public" },
     compressPublicAssets: true,
     prerender: { crawlLinks: true, routes: ["/"], failOnError: false },
