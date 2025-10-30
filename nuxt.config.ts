@@ -6,7 +6,7 @@ export default defineNuxtConfig({
 
   // App configuration
   app: {
-    baseURL: process.env.NUXT_APP_BASE_URL || "/",
+    baseURL: "/",
     head: {
       charset: "utf-8",
       viewport: "width=device-width, initial-scale=1",
@@ -56,7 +56,7 @@ export default defineNuxtConfig({
   },
 
   // CSS
-  css: ["@/assets/css/main.css"],
+  css: ["~/assets/css/main.css"],
 
   // PostCSS
   postcss: {
@@ -81,7 +81,7 @@ export default defineNuxtConfig({
       "@nuxt/image",
       {
         quality: 80,
-        formats: ["webp", "avif", "jpeg"],
+        formats: ["webp", "avif", "jpeg", "png"],
         provider: "static",
       },
     ],
