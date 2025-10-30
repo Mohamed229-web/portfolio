@@ -21,6 +21,7 @@ jobs:
       NUXT_APP_BASE_URL: "/portfolio/"
       NITRO_PRESET: github_pages
       NODE_OPTIONS: --max_old_space_size=4096
+      CI: true
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -29,6 +30,7 @@ jobs:
 
       - name: Detect package manager
         id: pm
+        shell: bash
         run: |
           if [ -f "${{ github.workspace }}/pnpm-lock.yaml" ]; then
             echo "manager=pnpm" >> $GITHUB_OUTPUT
@@ -53,10 +55,24 @@ jobs:
             **/yarn.lock
             **/package-lock.json
 
-      - name: Setup Pages
+      - name: Enable corepack (pnpm/yarn)
+        run: corepack enable
+
+      # Cache du store pnpm (si pnpm)
+      - name: Cache pnpm store
+        if: steps.pm.outputs.manager == 'pnpm'
+        uses: actions/cache@v4
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Setup GitHub Pages
         id: pages
         uses: actions/configure-pages@v5
 
+      # Cache build (pas dist)
       - name: Restore build cache
         uses: actions/cache@v4
         with:
@@ -76,7 +92,7 @@ jobs:
           elif [ "${{ steps.pm.outputs.manager }}" = "yarn" ]; then yarn generate;
           else npm run generate; fi
 
-      # (Optionnel) Garde cette étape si tu veux valider que ta CSS globale est bien packagée
+      # (Optionnel) Vérifie que tes classes globales existent bien dans la CSS buildée
       # - name: Verify global CSS is present
       #   run: |
       #     ls -al dist/_nuxt/*.css || true
