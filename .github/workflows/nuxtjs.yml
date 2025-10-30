@@ -88,7 +88,7 @@ jobs:
           NITRO_PRESET: github_pages
           NODE_OPTIONS: --max_old_space_size=4096
         run: ${{ steps.detect-package-manager.outputs.manager }} run generate
-      - name: Verify global CSS is present
+      - name: Verify main CSS is present
         run: |
           ls -al dist/_nuxt/*.css || true
           grep -R ".section-container" dist/_nuxt/*.css || (echo "::error::Main CSS (.section-container) not found in built CSS"; exit 1)
