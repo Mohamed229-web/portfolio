@@ -35,7 +35,7 @@ export default defineNuxtConfig({
         { property: "og:url", content: "https://mohamed-djibrila.info" },
         {
           property: "og:image",
-          content: "https://mohamed-djibrila.info/portfolio/profile.jpg",
+          content: "https://mohamed-djibrila.info/profile.jpg",
         },
         { name: "twitter:card", content: "summary_large_image" },
         {
@@ -49,7 +49,7 @@ export default defineNuxtConfig({
         { name: "theme-color", content: "#2a3257" },
       ],
       link: [
-        { rel: "icon", type: "image/x-icon", href: "/portfolio/favicon.ico" },
+        { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
         { rel: "canonical", href: "https://mohamed-djibrila.info" },
       ],
     },
@@ -71,7 +71,7 @@ export default defineNuxtConfig({
     [
       "@nuxtjs/tailwindcss",
       {
-        cssPath: "~/assets/css/tailwind.css",
+        cssPath: "~/assets/css/main.css",
         configPath: "tailwind.config",
         exposeConfig: false,
         viewer: true,
