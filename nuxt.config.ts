@@ -53,7 +53,7 @@ export default defineNuxtConfig({
     },
   },
 
-  css: ["~/assets/css/main.css"],
+  css: ["~/assets/css/tailwind.css"],
 
   modules: [
     [
@@ -64,16 +64,7 @@ export default defineNuxtConfig({
         provider: "static",
       },
     ],
-    [
-      "@nuxtjs/tailwindcss",
-      {
-        cssPath: "~/assets/css/main.css",
-        configPath: "tailwind.config.js",
-        exposeConfig: false,
-        injectPosition: 0,
-        viewer: true,
-      },
-    ],
+    ["@nuxtjs/tailwindcss"],
   ],
 
   ssr: false,
