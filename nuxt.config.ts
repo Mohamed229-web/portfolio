@@ -7,6 +7,7 @@ export default defineNuxtConfig({
   // App configuration
   app: {
     baseURL: "/portfolio/",
+    buildAssetsDir: "/_nuxt/",
     head: {
       charset: "utf-8",
       viewport: "width=device-width, initial-scale=1",
@@ -35,7 +36,7 @@ export default defineNuxtConfig({
         { property: "og:url", content: "https://mohamed-djibrila.info" },
         {
           property: "og:image",
-          content: "https://mohamed-djibrila.info/profile.jpg",
+          content: "https://mohamed-djibrila.info/portfolio/profile.jpg",
         },
         { name: "twitter:card", content: "summary_large_image" },
         {
@@ -49,7 +50,7 @@ export default defineNuxtConfig({
         { name: "theme-color", content: "#2a3257" },
       ],
       link: [
-        { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+        { rel: "icon", type: "image/x-icon", href: "/portfolio/favicon.ico" },
         { rel: "canonical", href: "https://mohamed-djibrila.info" },
       ],
     },
@@ -88,10 +89,14 @@ export default defineNuxtConfig({
   ],
 
   // SSR configuration
-  ssr: true,
+  ssr: false,
 
+  // Nitro configuration
   nitro: {
-    preset: "github_pages",
+    preset: "static",
+    output: {
+      publicDir: ".output/public",
+    },
     compressPublicAssets: true,
     prerender: {
       crawlLinks: true,
@@ -121,6 +126,14 @@ export default defineNuxtConfig({
   // Build configuration
   build: {
     transpile: ["gsap"],
+  },
+
+  // Vite configuration pour les chemins d'assets
+  vite: {
+    build: {
+      assetsInlineLimit: 0,
+    },
+    base: "/portfolio/",
   },
 
   // Performance optimizations
