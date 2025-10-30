@@ -72,9 +72,6 @@ export default defineNuxtConfig({
         exposeConfig: false,
         injectPosition: 0,
         viewer: true,
-        config: {
-          mode: "jit",
-        },
       },
     ],
   ],
@@ -96,11 +93,6 @@ export default defineNuxtConfig({
 
   vite: {
     build: { assetsInlineLimit: 0 },
-    css: {
-      postcss: {
-        plugins: [require("tailwindcss"), require("autoprefixer")],
-      },
-    },
   },
 
   build: {
