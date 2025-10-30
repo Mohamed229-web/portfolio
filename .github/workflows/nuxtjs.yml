@@ -19,9 +19,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       NUXT_APP_BASE_URL: "/portfolio/"
-      NITRO_PRESET: github_pages
-      NODE_OPTIONS: --max_old_space_size=4096
-      CI: true
+      NITRO_PRESET: "github_pages"
+      NODE_OPTIONS: "--max_old_space_size=4096"
+      CI: "true"
     steps:
       - name: Checkout
         uses: actions/checkout@v4
