@@ -139,7 +139,7 @@ onMounted(() => {
 .timeline {
   position: relative;
   max-width: 1200px;
-  margin: 0 auto 5rem;
+  margin: 0 auto 3rem;
 }
 
 .timeline::before {
@@ -320,10 +320,6 @@ onMounted(() => {
 }
 
 @media (max-width: 968px) {
-  .experience {
-    padding: 5rem 0;
-  }
-
   .timeline::before {
     left: 20px;
   }
