@@ -1,34 +1,24 @@
-# Sample workflow for building and deploying a Nuxt site to GitHub Pages
-#
-# To get started with Nuxt see: https://nuxtjs.org/docs/get-started/installation
-#
 name: Deploy Nuxt site to Pages
 
 on:
-  # Runs on pushes targeting the default branch
   push:
     branches: ["main"]
-
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
 jobs:
-  # Build job
   build:
     runs-on: ubuntu-latest
     env:
+      # Ajuste selon ton cas: "/" pour user/org page ; "/<repo>/" pour project page
       NUXT_APP_BASE_URL: "/"
       NITRO_PRESET: "github_pages"
       NODE_OPTIONS: "--max_old_space_size=4096"
@@ -36,66 +26,65 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Detect package manager
-        id: detect-package-manager
+        id: pm
         run: |
-          if [ -f "${{ github.workspace }}/yarn.lock" ]; then
+          if [ -f "${{ github.workspace }}/pnpm-lock.yaml" ]; then
+            echo "manager=pnpm" >> $GITHUB_OUTPUT
+            echo "install=install --frozen-lockfile" >> $GITHUB_OUTPUT
+          elif [ -f "${{ github.workspace }}/yarn.lock" ]; then
             echo "manager=yarn" >> $GITHUB_OUTPUT
-            echo "command=install" >> $GITHUB_OUTPUT
-            exit 0
-          elif [ -f "${{ github.workspace }}/package.json" ]; then
-            echo "manager=npm" >> $GITHUB_OUTPUT
-            echo "command=ci" >> $GITHUB_OUTPUT
-            exit 0
+            echo "install=install --frozen-lockfile --production=false" >> $GITHUB_OUTPUT
           else
-            echo "Unable to determine package manager"
-            exit 1
+            echo "manager=npm" >> $GITHUB_OUTPUT
+            echo "install=ci --include=dev" >> $GITHUB_OUTPUT
           fi
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "22"
-          cache: ${{ steps.detect-package-manager.outputs.manager }}
-      - name: Setup Pages
-        id: pages
-        uses: actions/configure-pages@v5
-        with:
-          # Automatically inject router.base in your Nuxt configuration file and set
-          # target to static (https://nuxtjs.org/docs/configuration-glossary/configuration-target/).
-          #
-          # You may remove this line if you want to manage the configuration yourself.
-          static_site_generator: nuxt
-      - name: Restore cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            dist
-            .nuxt
-          key: ${{ runner.os }}-nuxt-build-${{ hashFiles('dist') }}
-          restore-keys: |
-            ${{ runner.os }}-nuxt-build-
-      - name: Install dependencies
-        run: |
-          if [ "${{ steps.detect-package-manager.outputs.manager }}" = "pnpm" ]; then
-            pnpm install --frozen-lockfile
-          elif [ "${{ steps.detect-package-manager.outputs.manager }}" = "yarn" ]; then
-            yarn install --frozen-lockfile --production=false
-          else
-            npm ci --include=dev
-          fi
-      - name: Static HTML export with Nuxt
-        env:
-          NITRO_PRESET: github_pages
-          NODE_OPTIONS: --max_old_space_size=4096
-        run: ${{ steps.detect-package-manager.outputs.manager }} run generate
+          node-version: "20"
+          cache: ${{ steps.pm.outputs.manager }}
 
-  # Deployment job
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Install dependencies (include dev for build tools)
+        run: ${{ steps.pm.outputs.manager }} ${{ steps.pm.outputs.install }}
+
+      - name: Build (Nuxt SSG)
+        run: |
+          if [ "${{ steps.pm.outputs.manager }}" = "pnpm" ]; then pnpm generate;
+          elif [ "${{ steps.pm.outputs.manager }}" = "yarn" ]; then yarn generate;
+          else npm run generate; fi
+
+      # Détecte le dossier de sortie: Nuxt peut écrire dans .output/public ou dist selon la config
+      - name: Determine publish dir
+        id: pub
+        shell: bash
+        run: |
+          if [ -d "dist" ]; then
+            echo "publish_dir=dist" >> $GITHUB_OUTPUT
+          elif [ -d ".output/public" ]; then
+            echo "publish_dir=.output/public" >> $GITHUB_OUTPUT
+          else
+            echo "::error::No static output folder found (dist or .output/public). Check your build step."
+            exit 1
+          fi
+          echo "Using publish dir: $(cat $GITHUB_OUTPUT | sed -n 's/^publish_dir=//p')"
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ steps.pub.outputs.publish_dir }}
+
   deploy:
+    runs-on: ubuntu-latest
+    needs: build
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
