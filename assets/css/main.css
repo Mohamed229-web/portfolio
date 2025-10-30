@@ -1,57 +1,50 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Base */
 @layer base {
   * {
     @apply m-0 p-0 box-border;
   }
-
   html {
     @apply scroll-smooth;
   }
-
   body {
     @apply font-sans bg-black text-white overflow-x-hidden;
     font-family: "Inter", sans-serif;
   }
-
   ::selection {
     @apply bg-primary text-white;
   }
-
   ::-webkit-scrollbar {
     @apply w-2;
   }
-
   ::-webkit-scrollbar-track {
     @apply bg-black;
   }
-
   ::-webkit-scrollbar-thumb {
     @apply bg-primary rounded-full;
   }
-
   ::-webkit-scrollbar-thumb:hover {
     @apply bg-primary-light;
   }
 }
 
+/* Components */
 @layer components {
-  /* Custom scrollbar for Firefox */
   * {
     scrollbar-width: thin;
     scrollbar-color: #2a3257 #000000;
   }
 
-  /* Smooth transitions */
   a,
   button {
     @apply transition-all duration-300 ease-in-out;
   }
 
-  /* Focus styles */
   a:focus-visible,
   button:focus-visible,
   input:focus-visible,
@@ -66,7 +59,8 @@
     @apply text-center mb-16;
   }
   .section-tag {
-    @apply inline-block px-4 py-2 bg-[rgba(42,50,87,0.2)] border border-[rgba(42,50,87,0.4)] rounded-full text-sm font-medium text-[#2a3257] mb-4;
+    @apply inline-block px-4 py-2 bg-[rgba(42,50,87,0.2)] border border-[rgba(42,50,87,0.4)]
+           rounded-full text-sm font-medium text-[#2a3257] mb-4;
   }
   .section-title {
     @apply text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4;
@@ -76,43 +70,36 @@
   }
 }
 
+/* Utilities */
 @layer utilities {
-  /* Custom utilities */
   .text-gradient {
     @apply bg-gradient-to-r from-white to-primary bg-clip-text text-transparent;
   }
-
   .bg-gradient-primary {
     background: linear-gradient(135deg, #2a3257, #4a5287);
   }
-
   .glass-effect {
     @apply backdrop-blur-lg bg-opacity-10;
   }
 
-  /* Animation delays */
   .delay-100 {
     animation-delay: 100ms;
   }
-
   .delay-200 {
     animation-delay: 200ms;
   }
-
   .delay-300 {
     animation-delay: 300ms;
   }
-
   .delay-400 {
     animation-delay: 400ms;
   }
-
   .delay-500 {
     animation-delay: 500ms;
   }
 }
 
-/* Custom animations */
+/* Keyframes + helpers (ok hors layer) */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -123,7 +110,6 @@
     transform: translateY(0);
   }
 }
-
 @keyframes slideInLeft {
   from {
     opacity: 0;
@@ -134,7 +120,6 @@
     transform: translateX(0);
   }
 }
-
 @keyframes slideInRight {
   from {
     opacity: 0;
@@ -145,7 +130,6 @@
     transform: translateX(0);
   }
 }
-
 @keyframes scaleIn {
   from {
     opacity: 0;
@@ -157,15 +141,12 @@
   }
 }
 
-/* Utility classes for animations */
 .animate-fadeIn {
   animation: fadeIn 0.6s ease-out forwards;
 }
-
 .animate-slideInLeft {
   animation: slideInLeft 0.6s ease-out forwards;
 }
-
 .animate-slideInRight {
   animation: slideInRight 0.6s ease-out forwards;
 }

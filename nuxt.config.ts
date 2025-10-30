@@ -1,12 +1,10 @@
 import { defineNuxtConfig } from "nuxt/config";
 
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
 
-  // App configuration
   app: {
-    baseURL: "/",
+    baseURL: process.env.NUXT_APP_BASE_URL || "/",
     head: {
       charset: "utf-8",
       viewport: "width=device-width, initial-scale=1",
@@ -55,28 +53,13 @@ export default defineNuxtConfig({
     },
   },
 
-  // CSS
   css: ["~/assets/css/main.css"],
 
-  // PostCSS
   postcss: {
-    plugins: {
-      tailwindcss: {},
-      autoprefixer: {},
-    },
+    plugins: { tailwindcss: {}, autoprefixer: {} },
   },
 
-  // Modules
   modules: [
-    [
-      "@nuxtjs/tailwindcss",
-      {
-        cssPath: "~/assets/css/main.css",
-        configPath: "tailwind.config",
-        exposeConfig: false,
-        viewer: true,
-      },
-    ],
     [
       "@nuxt/image",
       {
@@ -87,58 +70,28 @@ export default defineNuxtConfig({
     ],
   ],
 
-  // SSR configuration
   ssr: false,
 
-  // Nitro configuration
   nitro: {
-    preset: "static",
-    output: {
-      publicDir: ".output/public",
-    },
+    preset: process.env.NITRO_PRESET || "static",
+    output: { publicDir: ".output/public" },
     compressPublicAssets: true,
-    prerender: {
-      crawlLinks: true,
-      routes: ["/"],
-      failOnError: false,
-    },
+    prerender: { crawlLinks: true, routes: ["/"], failOnError: false },
   },
 
-  // Runtime config
-  runtimeConfig: {
-    public: {
-      siteUrl: "https://mohamed-djibrila.info",
-    },
-  },
+  runtimeConfig: { public: { siteUrl: "https://mohamed-djibrila.info" } },
 
-  // Experimental features
-  experimental: {
-    payloadExtraction: false,
-  },
+  experimental: { payloadExtraction: false },
 
-  // TypeScript
-  typescript: {
-    strict: true,
-    shim: false,
-  },
+  typescript: { strict: true, shim: false },
 
-  // Build configuration
-  build: {
-    transpile: ["gsap"],
-  },
+  build: { transpile: ["gsap"] },
 
-  // Vite configuration pour les chemins d'assets
   vite: {
-    build: {
-      assetsInlineLimit: 0,
-    },
-    base: "/",
+    build: { assetsInlineLimit: 0 },
   },
 
-  // Performance optimizations
-  routeRules: {
-    "/": { prerender: true },
-  },
+  routeRules: { "/": { prerender: true } },
 
   compatibilityDate: "2025-01-24",
 });
