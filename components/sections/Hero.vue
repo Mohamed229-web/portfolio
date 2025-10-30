@@ -17,7 +17,7 @@
             <span class="typing-text">Développeur FullStack TypeScript</span>
           </h2>
           <p class="hero-description">
-            Passionné par le développement web avec plus de 4 ans d'expérience. 
+            Passionné par le développement web avec plus de 4 ans d'expérience.
             Spécialisé en <span class="highlight">React</span>, <span class="highlight">Vue.js</span>, 
             <span class="highlight">NestJS</span> et <span class="highlight">Ruby on Rails</span>.
             Profil DevOps Junior avec une vision entrepreneuriale forte.
@@ -66,11 +66,10 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
 import gsap from 'gsap'
-import ProfileImage from '~/assets/images/profile.jpg'
+import ProfileImage from '../../assets/images/profile.jpg'
 
 onMounted(() => {
   const tl = gsap.timeline()
-  
   tl.from('.greeting', { opacity: 0, y: 30, duration: 0.8, ease: 'power3.out' })
     .from('.hero-title', { opacity: 0, y: 30, duration: 0.8, ease: 'power3.out' }, '-=0.4')
     .from('.hero-subtitle', { opacity: 0, y: 30, duration: 0.8, ease: 'power3.out' }, '-=0.4')

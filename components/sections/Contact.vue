@@ -1,6 +1,6 @@
 <template>
   <section id="contact" class="contact">
-    <div class="container">
+    <div class="section-container">
       <div class="section-header">
         <span class="section-tag">Restons en contact</span>
         <h2 class="section-title">Me Contacter</h2>
@@ -11,7 +11,7 @@
         <div class="contact-info">
           <div class="info-header">
             <h3>Parlons de votre projet</h3>
-            <p>Je suis ouvert aux opportunités en CDI à partir de septembre 2025 ainsi qu'aux missions freelance.</p>
+            <p>Je suis ouvert aux opportunités en CDI ainsi qu'aux missions freelance.</p>
           </div>
 
           <div class="contact-cards">
@@ -76,10 +76,10 @@
           <form @submit.prevent="handleSubmit" class="contact-form">
             <div class="form-group">
               <label for="name">Nom complet</label>
-              <input 
-                type="text" 
-                id="name" 
-                v-model="form.name" 
+              <input
+                type="text"
+                id="name"
+                v-model="form.name"
                 placeholder="Votre nom"
                 required
               />
@@ -87,10 +87,10 @@
 
             <div class="form-group">
               <label for="email">Email</label>
-              <input 
-                type="email" 
-                id="email" 
-                v-model="form.email" 
+              <input
+                type="email"
+                id="email"
+                v-model="form.email"
                 placeholder="votre.email@exemple.com"
                 required
               />
@@ -98,10 +98,10 @@
 
             <div class="form-group">
               <label for="subject">Sujet</label>
-              <input 
-                type="text" 
-                id="subject" 
-                v-model="form.subject" 
+              <input
+                type="text"
+                id="subject"
+                v-model="form.subject"
                 placeholder="Sujet de votre message"
                 required
               />
@@ -109,9 +109,9 @@
 
             <div class="form-group">
               <label for="message">Message</label>
-              <textarea 
-                id="message" 
-                v-model="form.message" 
+              <textarea
+                id="message"
+                v-model="form.message"
                 rows="6"
                 placeholder="Décrivez votre projet ou votre demande..."
                 required
@@ -119,7 +119,7 @@
             </div>
 
             <button type="submit" class="submit-btn" :disabled="isSubmitting">
-              <span v-if="!isSubmitting">
+              <span class="flex items-center justify-center gap-3" v-if="!isSubmitting">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <line x1="22" y1="2" x2="11" y2="13"></line>
                   <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
@@ -158,13 +158,11 @@ const submitSuccess = ref(false)
 const handleSubmit = async () => {
   isSubmitting.value = true
   submitMessage.value = ''
-  
   // Simuler l'envoi du formulaire
   setTimeout(() => {
     isSubmitting.value = false
     submitSuccess.value = true
     submitMessage.value = 'Message envoyé avec succès ! Je vous répondrai dans les plus brefs délais.'
-    
     // Réinitialiser le formulaire
     form.value = {
       name: '',
@@ -172,7 +170,6 @@ const handleSubmit = async () => {
       subject: '',
       message: ''
     }
-    
     // Effacer le message après 5 secondes
     setTimeout(() => {
       submitMessage.value = ''
@@ -205,44 +202,6 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.contact {
-  padding: 8rem 0;
-  position: relative;
-}
-
-.container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
-.section-header {
-  text-align: center;
-  margin-bottom: 4rem;
-}
-
-.section-tag {
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  background: rgba(42, 50, 87, 0.2);
-  border: 1px solid rgba(42, 50, 87, 0.4);
-  border-radius: 20px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: #2a3257;
-  margin-bottom: 1rem;
-}
-
-.section-title {
-  font-size: clamp(2.5rem, 4vw, 3.5rem);
-  font-weight: 900;
-  margin-bottom: 1rem;
-}
-
-.section-subtitle {
-  font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.7);
-}
 
 .contact-content {
   display: grid;
@@ -328,10 +287,10 @@ onMounted(() => {
   gap: 0.75rem;
   padding: 1rem 1.5rem;
   background: rgba(34, 197, 94, 0.1);
-  border: 1px solid rgba(34, 197, 94, 0.3);
+  border: 1px solid rgba(11, 112, 48, 0.3);
   border-radius: 25px;
   font-weight: 600;
-  color: rgb(34, 197, 94);
+  color: rgb(3, 108, 41);
 }
 
 @media (max-width: 968px) {
@@ -352,7 +311,7 @@ onMounted(() => {
 .status-dot {
   width: 10px;
   height: 10px;
-  background: rgb(34, 197, 94);
+  background: rgb(3, 108, 41);
   border-radius: 50%;
   animation: pulse 2s infinite;
 }
@@ -384,7 +343,7 @@ onMounted(() => {
 .form-group textarea {
   width: 100%;
   padding: 1rem;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0);
   border: 1px solid rgba(42, 50, 87, 0.5);
   border-radius: 10px;
   color: #ffffff;
@@ -397,6 +356,11 @@ onMounted(() => {
   outline: none;
   border-color: #2a3257;
   background: rgba(0, 0, 0, 0.4);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: rgba(255, 255, 255, 0.6);
 }
 
 .form-group textarea {

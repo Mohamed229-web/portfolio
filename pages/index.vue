@@ -25,14 +25,15 @@ import { onMounted } from "vue";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useHead } from "nuxt/app";
-import Navbar from "~/components/Navbar.vue";
-import Hero from "~/components/Hero.vue";
-import About from "~/components/About.vue";
-import Skills from "~/components/Skills.vue";
-import Projects from "~/components/Projects.vue";
-import Experience from "~/components/Experience.vue";
-import Contact from "~/components/Contact.vue";
+import Navbar from "~/components/sections/Navbar.vue";
+import Hero from "~/components/sections/Hero.vue";
+import About from "~/components/sections/About.vue";
+import Skills from "~/components/sections/Skills.vue";
+import Projects from "~/components/sections/Projects.vue";
+import Experience from "~/components/sections/Experience.vue";
+import Contact from "~/components/sections/Contact.vue";
 import WhatsAppPic from "~/assets/images/whatsApp.webp";
+import Footer from "~/components/sections/Footer.vue";
 
 onMounted(() => {
   gsap.registerPlugin(ScrollTrigger);

@@ -1,6 +1,6 @@
 <template>
-  <section id="about" class="about" ref="aboutSection">
-    <div class="container">
+  <section id="about" ref="aboutSection">
+    <div class="section-container">
       <div class="section-header">
         <span class="section-tag">Qui suis-je</span>
         <h2 class="section-title">À propos</h2>
@@ -39,49 +39,31 @@
           </p>
 
           <div class="about-stats">
-            <div class="stat-card">
-              <div class="stat-number">4+</div>
-              <div class="stat-label">Années d'expérience</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-number">15+</div>
-              <div class="stat-label">Projets réalisés</div>
-            </div>
-            <div class="stat-card">
-              <div class="stat-number">100%</div>
-              <div class="stat-label">Clients satisfaits</div>
-            </div>
+            <AboutStatCard number="4+" label="Années d'expérience" />
+            <AboutStatCard number="15+" label="Projets réalisés" />
+            <AboutStatCard number="100%" label="Clients satisfaits" />
           </div>
         </div>
 
         <div class="about-highlights">
-          <div class="highlight-card">
-            <div class="icon">💼</div>
-            <h3>Statut actuel</h3>
-            <p>Recherche CDI dès septembre 2025</p>
-            <p class="sub">Ouvert aux missions freelance</p>
-          </div>
-
-          <div class="highlight-card">
-            <div class="icon">🚀</div>
-            <h3>Expertise technique</h3>
-            <p>FullStack TypeScript (React/Vue + NestJS)</p>
-            <p class="sub">Ruby on Rails • DevOps Junior</p>
-          </div>
-
-          <div class="highlight-card">
-            <div class="icon">🎯</div>
-            <h3>Vision entrepreneuriale</h3>
-            <p>Approche produit & business</p>
-            <p class="sub">Développement stratégique</p>
-          </div>
-
-          <div class="highlight-card">
-            <div class="icon">🌍</div>
-            <h3>Localisation</h3>
-            <p>Île-de-France, France</p>
-            <p class="sub">Disponible pour télétravail/hybride</p>
-          </div>
+          <AboutHighlightCard
+            icon="💼"
+            title="Statut actuel"
+            description="Recherche un poste en CDI"
+            subDescription="Ouvert aux missions freelance"
+          />
+          <AboutHighlightCard
+            icon="🚀"
+            title="Expertise technique"
+            description="FullStack TypeScript (React/Vue + NestJS)"
+            subDescription="Ruby on Rails • DevOps Junior"
+          />
+          <AboutHighlightCard
+            icon="🎯"
+            title="Vision entrepreneuriale"
+            description="Approche produit & business"
+            subDescription="Développement stratégique"
+          />
         </div>
       </div>
     </div>
@@ -92,6 +74,8 @@
 import { onMounted, onUnmounted, ref, nextTick } from "vue";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import AboutStatCard from "../elements/cards/AboutStatCard.vue";
+import AboutHighlightCard from "../elements/cards/AboutHighlightCard.vue";
 
 const aboutSection = ref<HTMLElement | null>(null);
 let ctx: gsap.Context | undefined;
@@ -147,40 +131,6 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-.about {
-  padding: 8rem 0;
-  position: relative;
-}
-
-.container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
-.section-header {
-  text-align: center;
-  margin-bottom: 4rem;
-}
-
-.section-tag {
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  background: rgba(42, 50, 87, 0.2);
-  border: 1px solid rgba(42, 50, 87, 0.4);
-  border-radius: 20px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: #2a3257;
-  margin-bottom: 1rem;
-}
-
-.section-title {
-  font-size: clamp(2.5rem, 4vw, 3.5rem);
-  font-weight: 900;
-  margin-bottom: 1rem;
-}
-
 .about-content {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
@@ -213,72 +163,10 @@ strong {
   margin-top: 3rem;
 }
 
-.stat-card {
-  text-align: center;
-  padding: 2rem 1rem;
-  background: rgba(42, 50, 87, 0.1);
-  border: 1px solid rgba(42, 50, 87, 0.3);
-  border-radius: 15px;
-  transition: all 0.3s ease;
-}
-
-.stat-card:hover {
-  background: rgba(42, 50, 87, 0.2);
-  transform: translateY(-5px);
-}
-
-.stat-number {
-  font-size: 3rem;
-  font-weight: 900;
-  color: #2a3257;
-  margin-bottom: 0.5rem;
-}
-
-.stat-label {
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.7);
-}
-
 .about-highlights {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-}
-
-.highlight-card {
-  padding: 2rem;
-  background: rgba(42, 50, 87, 0.1);
-  border: 1px solid rgba(42, 50, 87, 0.3);
-  border-radius: 15px;
-  transition: all 0.3s ease;
-}
-
-.highlight-card:hover {
-  background: rgba(42, 50, 87, 0.2);
-  transform: translateX(10px);
-}
-
-.icon {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-}
-
-.highlight-card h3 {
-  font-size: 1.3rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-  color: #ffffff;
-}
-
-.highlight-card p {
-  font-size: 1rem;
-  color: rgba(255, 255, 255, 0.8);
-  margin-bottom: 0.3rem;
-}
-
-.sub {
-  font-size: 0.9rem !important;
-  color: rgba(255, 255, 255, 0.6) !important;
 }
 
 @media (max-width: 968px) {

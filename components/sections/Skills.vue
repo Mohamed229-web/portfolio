@@ -1,6 +1,6 @@
 <template>
   <section id="skills" class="skills">
-    <div class="container">
+    <div class="section-container">
       <div class="section-header">
         <span class="section-tag">Stack technique</span>
         <h2 class="section-title">Compétences</h2>
@@ -208,44 +208,6 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-.skills {
-  padding: 8rem 0;
-  background: linear-gradient(180deg, transparent, rgba(42, 50, 87, 0.05));
-}
-
-.container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 2rem;
-}
-
-.section-header {
-  text-align: center;
-  margin-bottom: 4rem;
-}
-
-.section-tag {
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  background: rgba(42, 50, 87, 0.2);
-  border: 1px solid rgba(42, 50, 87, 0.4);
-  border-radius: 20px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: #2a3257;
-  margin-bottom: 1rem;
-}
-
-.section-title {
-  font-size: clamp(2.5rem, 4vw, 3.5rem);
-  font-weight: 900;
-  margin-bottom: 1rem;
-}
-
-.section-subtitle {
-  font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.7);
-}
 
 .skills-grid {
   display: grid;
