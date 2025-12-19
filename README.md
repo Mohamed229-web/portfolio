@@ -131,28 +131,6 @@ Les meta tags sont configurés dans `nuxt.config.ts`. N'oubliez pas de mettre à
 - Description
 - Mots-clés
 
-## 🚀 Déploiement
-
-### Vercel (Recommandé)
-
-```bash
-# Installer Vercel CLI
-npm i -g vercel
-
-# Déployer
-vercel
-```
-
-### Netlify
-
-```bash
-# Build command
-npm run generate
-
-# Publish directory
-.output/public
-```
-
 ### Docker
 
 ```bash
